@@ -1,0 +1,18 @@
+{
+  "hiera_ensure" : "present",
+  "hiera_hierarchy" : [
+    "%{environment}", 
+    "%{hostname}", 
+    "common" 
+  ],
+  "hiera_backends" : [
+    {
+      "type" : "json",
+      "datadir" : "/var/lib/hiera"
+    },
+    {
+      "type" : "puppet",
+      "datasource" : "data"
+    }
+  ]
+}
