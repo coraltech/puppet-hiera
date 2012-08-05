@@ -69,7 +69,7 @@ describe 'HieraPuppet' do
   end
 
   describe 'HieraPuppet#lookup' do
-    let(:scope) { PuppetlabsSpec::PuppetSeams.parser_scope }
+    let(:scope) { PuppetlabsSpec::PuppetInternals.scope }
 
     it "should return the value from Hiera" do
       Hiera.any_instance.stubs(:lookup).returns('8080')
@@ -86,7 +86,7 @@ describe 'HieraPuppet' do
       Hiera.any_instance.stubs(:lookup).returns(nil)
       expect do
         HieraPuppet.lookup('port', nil, scope, nil, :priority)
-      end.should raise_error(Puppet::ParseError,
+      end.to raise_error(Puppet::ParseError,
         /Could not find data item port in any Hiera data file and no default supplied/)
     end
   end
@@ -98,7 +98,7 @@ describe 'HieraPuppet' do
     end
 
     it 'should raise a useful error when no key is supplied' do
-      expect { HieraPuppet.parse_args([]) }.should raise_error(Puppet::ParseError,
+      expect { HieraPuppet.parse_args([]) }.to raise_error(Puppet::ParseError,
         /Please supply a parameter to perform a Hiera lookup/)
     end
   end
