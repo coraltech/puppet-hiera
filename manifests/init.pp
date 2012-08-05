@@ -26,8 +26,8 @@ class hiera (
 
   file { 'hiera-puppet-gem':
     path      => $puppet_gem,
-    ensure    => 'present',
-    source    => 'puppet:///modules/puppet/hiera-puppet-1.0.0rc1.31.gem',
+    content   => undef,
+    source    => 'puppet:///modules/hiera/hiera-puppet-1.0.0rc1.31.gem',
     subscribe => [ Package['hiera'], Class['puppet'] ],
   }
 
@@ -40,7 +40,7 @@ class hiera (
   exec { 'hiera-remove-puppet-gem':
     command     => "rm -f '${puppet_gem}'",
     refreshonly => true,
-    subscribe   => File['hiera-install-puppet-gem'],
+    subscribe   => Exec['hiera-install-puppet-gem'],
   }
 
   #-----------------------------------------------------------------------------
@@ -54,20 +54,11 @@ class hiera (
     }
   }
 
-  if $puppet_config and defined(Class['puppet']) {
-    File {
+  if $puppet_config {
+    file { 'hiera-puppet-config':
       path    => $puppet_config,
       content => template($puppet_config_template),
       require => [ Package['hiera'], Class['puppet'] ],
-    }
-
-    if defined(Service['puppet']) {
-      file { 'hiera-puppet-config':
-        notify => Service['puppet'],
-      }
-    }
-    else {
-      file { 'hiera-puppet-config': }
     }
   }
 }

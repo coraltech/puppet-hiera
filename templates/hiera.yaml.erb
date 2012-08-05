@@ -1,15 +1,15 @@
 ---
 :hierarchy:
-<% hiera_hierarchy.each do |level| -%>
+<% hierarchy.each do |level| -%>
     - <%= level %>
 <% end %>
 :backends:
-<% hiera_backends.each do |backend| -%>
+<% backends.each do |backend| -%>
 <% if backend['type'] != 'puppet' -%>
     - <%= backend['type'] %>
 <% end -%>
 <% end %>
-<% hiera_backends.each do |backend| -%>
+<% backends.each do |backend| -%>
 <% if backend['type'] != 'puppet' -%>
 :<%= backend['type'] -%>:
 <% if backend['datasource'] -%>
