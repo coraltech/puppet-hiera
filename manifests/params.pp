@@ -34,7 +34,8 @@ class hiera::params {
       }
       $os_puppet_config_template = 'hiera/hiera.puppet.yaml.erb'
 
-      $os_temp_gem               = '/tmp/hiera-puppet.gem'
+      $os_hiera_build_dir        = '/usr/local/share/hiera'
+      $os_build_gem              = "${os_hiera_build_dir}/hiera-puppet.gem"
     }
     default: {
       fail("The hiera module is not currently supported on ${::operatingsystem}")
