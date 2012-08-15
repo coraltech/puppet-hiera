@@ -2,14 +2,14 @@
 class hiera (
 
   $ensure                 = $hiera::params::hiera_ensure,
-  $config                 = $hiera::params::os_config,
-  $puppet_config          = $hiera::params::os_puppet_config,
-  $hiera_build_dir        = $hiera::params::os_hiera_build_dir,
-  $puppet_gem             = $hiera::params::os_build_gem,
+  $config                 = $hiera::params::config,
+  $puppet_config          = $hiera::params::puppet_config,
+  $build_dir              = $hiera::params::build_dir,
+  $puppet_gem             = $hiera::params::build_gem,
   $hierarchy              = $hiera::params::hierarchy,
   $backends               = $hiera::params::backends,
-  $config_template        = $hiera::params::os_config_template,
-  $puppet_config_template = $hiera::params::os_puppet_config_template,
+  $config_template        = $hiera::params::config_template,
+  $puppet_config_template = $hiera::params::puppet_config_template,
 
 ) inherits hiera::params {
 
@@ -26,7 +26,7 @@ class hiera (
   }
 
   file { 'hiera-build-dir':
-    path    => $hiera_build_dir,
+    path    => $build_dir,
     ensure  => directory,
     require => Package['hiera'],
   }
