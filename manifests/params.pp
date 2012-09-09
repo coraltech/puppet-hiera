@@ -3,9 +3,6 @@ class hiera::params inherits hiera::default {
 
   $hiera_ensure            = module_param('ensure')
 
-  $build_dir               = module_param('build_dir')
-  $build_gem               = module_param('build_gem')
-
   #---
 
   $config_name             = module_param('config_name')

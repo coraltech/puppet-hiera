@@ -31,9 +31,6 @@ class hiera::default {
 
       $puppet_config           = $puppet_config_default
       $puppet_config_template  = 'hiera/hiera.puppet.yaml.erb'
-
-      $build_dir               = '/usr/local/share/hiera'
-      $build_gem               = "${build_dir}/hiera-puppet.gem"
     }
     default: {
       fail("The hiera module is not currently supported on ${::operatingsystem}")
