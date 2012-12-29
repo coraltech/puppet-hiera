@@ -2,7 +2,7 @@
 class hiera::default {
 
   $ensure       = 'present'
-  $hierarchy    = [ '%{environment}', '%{hostname}', 'common' ]
+  $hierarchy    = [ '%{::hostname}', '%{::environment}', 'common' ]
   $backends     = [
     {
       'type'    => 'json',
