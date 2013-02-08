@@ -14,6 +14,6 @@ class hiera::params inherits hiera::default {
 
   #---
 
-  $hierarchy               = module_array('hierarchy')
+  $hierarchy               = module_param('hierarchy')
   $backends                = module_array('backends')
 }
